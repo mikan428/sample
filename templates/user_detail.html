@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% load static %}
+
+{% block contents %}
+
+
+<div class="container">
+    <div class="userjo">
+          <h1>過去の質問歴</h1>
+     {% for diary in diary_list %}
+          
+                    <div class="post-preview">
+                        <a href="{% url 'ampapp:diary_detail' diary.pk %}">
+                          <h2 class="post-title">
+                            {{ diary.title }}
+                          </h2>
+                          <h3 class="post-subtitle">
+                            {{ diary.content|truncatechars:20 }}
+                          </h3>
+                        </a>
+                        <p class="post-meta">{{ diary.created_at }}</p>
+                    <div class="clearfix">
+                            <a class="btn btn-primary float-right" href="{% url 'ampapp:diary_create'%}">ベストアンサーに</a>
+                    </div>
+                    </div>
+                    <hr>
+     {% empty %}
+          <p>日記がありません。</p>
+     {% endfor %}
+    </div>
+</div>
+{% endblock %}
